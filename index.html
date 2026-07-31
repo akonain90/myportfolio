@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Konain Ali — Python Developer &amp; AI Automation Engineer</title>
+<meta name="description" content="Muhammad Konain Ali — Junior Python Developer, Web Developer, Graphic Designer, Prompt Engineer &amp; AI Automation Expert. Building intelligent software, clean interfaces and automated systems.">
+<meta name="keywords" content="Muhammad Konain Ali, Python Developer, Web Developer, AI Automation, n8n, Prompt Engineering, Graphic Design, MySQL, SQL Server">
+<meta property="og:title" content="Muhammad Konain Ali — Portfolio">
+<meta property="og:description" content="Junior Python Developer, Web Developer, Prompt Engineer &amp; AI Automation Expert.">
+<meta property="og:type" content="website">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- AOS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
+
+<style>
+/* ==========================================================================
+   0. DESIGN TOKENS
+   ========================================================================== */
+:root{
+  --bg:#09090B;
+  --bg-elevated:#0d0d10;
+  --primary:#3B82F6;
+  --secondary:#8B5CF6;
+  --accent:#06B6D4;
+  --white:#FFFFFF;
+  --gray:#A1A1AA;
+  --gray-dim:#6b6b74;
+  --card:rgba(255,255,255,0.08);
+  --card-border:rgba(255,255,255,0.10);
+  --font-head:'Space Grotesk', sans-serif;
+  --font-body:'Poppins', sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+  --ease:cubic-bezier(.16,.84,.44,1);
+  --radius:20px;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--font-body);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+::selection{background:var(--primary);color:#fff;}
+
+::-webkit-scrollbar{width:9px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--primary),var(--secondary));border-radius:10px;}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
+
+.container{width:min(1240px, 92%);margin-inline:auto;}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--accent);
+  display:inline-flex;
+  align-items:center;
+  gap:.6em;
+  margin-bottom:1.1rem;
+}
+.eyebrow::before{content:'';width:26px;height:1px;background:linear-gradient(90deg,var(--accent),transparent);}
+.section-head{max-width:640px;margin-bottom:3.4rem;}
+.section-head h2{
+  font-family:var(--font-head);
+  font-size:clamp(2rem,4.2vw,3.1rem);
+  font-weight:600;
+  line-height:1.12;
+  letter-spacing:-.02em;
+}
+.section-head p{color:var(--gray);margin-top:1rem;font-size:1.02rem;line-height:1.7;max-width:520px;}
+.grad-text{
+  background:linear-gradient(100deg,var(--primary),var(--secondary) 55%,var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+section{position:relative;padding:8.5rem 0;}
+@media(max-width:768px){section{padding:5.5rem 0;}}
+
+/* ==========================================================================
+   1. LOADING SCREEN
+   ========================================================================== */
+#loader{
+  position:fixed;inset:0;z-index:9999;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.4rem;
+  transition:opacity .7s var(--ease), visibility .7s var(--ease);
+}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.loader-mark{
+  font-family:var(--font-head);font-size:2.2rem;font-weight:700;letter-spacing:-.02em;
+  position:relative;
+}
+.loader-bar{width:180px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.loader-bar span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));animation:loadbar 1.4s var(--ease) forwards;}
+@keyframes loadbar{to{width:100%;}}
+.loader-pct{font-family:var(--font-mono);font-size:.75rem;color:var(--gray);letter-spacing:.1em;}
+
+/* ==========================================================================
+   2. AMBIENT BACKGROUND (particles / blobs / grid / cursor glow)
+   ========================================================================== */
+#particle-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;}
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+.blob{position:fixed;border-radius:50%;filter:blur(110px);z-index:0;pointer-events:none;opacity:.35;}
+.blob-1{width:520px;height:520px;background:var(--primary);top:-180px;left:-120px;animation:float1 18s ease-in-out infinite;}
+.blob-2{width:460px;height:460px;background:var(--secondary);top:30%;right:-160px;animation:float2 22s ease-in-out infinite;}
+.blob-3{width:400px;height:400px;background:var(--accent);bottom:-140px;left:35%;animation:float1 20s ease-in-out infinite reverse;}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(60px,80px) scale(1.12);}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-70px,60px) scale(1.08);}}
+
+#cursor-glow{
+  position:fixed;top:0;left:0;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle, rgba(59,130,246,.10), rgba(139,92,246,.05) 45%, transparent 70%);
+  pointer-events:none;z-index:1;transform:translate(-50%,-50%);
+  transition:opacity .3s ease;
+  display:none;
+}
+@media(hover:hover) and (pointer:fine){#cursor-glow{display:block;}}
+
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));z-index:2000;width:0%;}
+
+/* ==========================================================================
+   3. NAVBAR
+   ========================================================================== */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:1.6rem 0;transition:all .45s var(--ease);
+}
+header.scrolled{
+  padding:.9rem 0;
+  background:rgba(9,9,11,.65);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+nav{display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:var(--font-head);font-size:1.5rem;font-weight:700;letter-spacing:-.02em;}
+.logo span{color:var(--primary);}
+.nav-links{display:flex;gap:2.3rem;}
+.nav-links a{
+  font-size:.92rem;font-weight:500;color:var(--gray);position:relative;padding:.3rem 0;transition:color .3s;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--accent);transition:width .35s var(--ease);
+}
+.nav-links a:hover, .nav-links a.active{color:var(--white);}
+.nav-links a:hover::after, .nav-links a.active::after{width:100%;}
+.nav-cta{display:flex;align-items:center;gap:1rem;}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  padding:.78rem 1.6rem;border-radius:100px;font-size:.88rem;font-weight:600;
+  position:relative;overflow:hidden;transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+  white-space:nowrap;
+}
+.btn-primary{
+  background:linear-gradient(100deg,var(--primary),var(--secondary));color:#fff;
+  box-shadow:0 0 0 rgba(59,130,246,0);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px -8px rgba(59,130,246,.55);}
+.btn-outline{
+  border:1px solid rgba(255,255,255,.16);color:var(--white);background:rgba(255,255,255,.03);
+}
+.btn-outline:hover{border-color:var(--accent);background:rgba(6,182,212,.08);transform:translateY(-3px);}
+.btn .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:ripple .6s linear;pointer-events:none;}
+@keyframes ripple{to{transform:scale(3);opacity:0;}}
+.hide-mobile{display:inline-flex;}
+
+.burger{display:none;flex-direction:column;gap:5px;width:28px;cursor:pointer;z-index:1001;}
+.burger span{height:2px;background:#fff;border-radius:2px;transition:all .35s var(--ease);}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+.mobile-menu{
+  position:fixed;inset:0;background:rgba(9,9,11,.98);backdrop-filter:blur(20px);
+  z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+  transform:translateY(-100%);transition:transform .5s var(--ease);
+}
+.mobile-menu.open{transform:translateY(0);}
+.mobile-menu a{font-family:var(--font-head);font-size:1.6rem;font-weight:600;}
+.mobile-menu .nav-cta{margin-top:1rem;flex-direction:column;}
+
+/* ==========================================================================
+   4. HERO
+   ========================================================================== */
+.hero{
+  min-height:100vh;display:flex;align-items:center;padding-top:7rem;position:relative;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;
+}
+.hero-text .eyebrow{margin-bottom:1.4rem;}
+.hero-text h1{
+  font-family:var(--font-head);font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(2.4rem,5.4vw,4.3rem);line-height:1.06;
+}
+.hero-role{
+  margin-top:1.3rem;font-family:var(--font-mono);font-size:clamp(1.05rem,2vw,1.35rem);color:var(--accent);
+  min-height:1.8em;display:flex;align-items:center;
+}
+.hero-role .cursor-bar{display:inline-block;width:2px;height:1.1em;background:var(--accent);margin-left:3px;animation:blink 1s steps(1) infinite;}
+@keyframes blink{50%{opacity:0;}}
+.hero-text p.intro{margin-top:1.6rem;color:var(--gray);max-width:520px;line-height:1.8;font-size:1.02rem;}
+.hero-btns{display:flex;gap:1.1rem;margin-top:2.4rem;flex-wrap:wrap;}
+.hero-stats{display:flex;gap:2.4rem;margin-top:3.4rem;}
+.hero-stats div{border-left:1px solid rgba(255,255,255,.12);padding-left:1rem;}
+.hero-stats h3{font-family:var(--font-head);font-size:1.7rem;background:linear-gradient(100deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero-stats span{font-size:.78rem;color:var(--gray);}
+
+.hero-visual{position:relative;height:520px;display:flex;align-items:center;justify-content:center;}
+#hero-3d{position:absolute;inset:0;}
+.hero-orbit-card{
+  position:absolute;padding:.9rem 1.1rem;border-radius:14px;
+  background:var(--card);border:1px solid var(--card-border);backdrop-filter:blur(14px);
+  font-family:var(--font-mono);font-size:.78rem;display:flex;align-items:center;gap:.6rem;
+  animation:orbitFloat 6s ease-in-out infinite;box-shadow:0 20px 40px -20px rgba(0,0,0,.6);
+}
+.hero-orbit-card i{color:var(--accent);}
+.oc1{top:6%;left:0%;animation-delay:0s;}
+.oc2{bottom:14%;left:-4%;animation-delay:1.2s;}
+.oc3{top:44%;right:-6%;animation-delay:2s;}
+.oc4{bottom:2%;right:8%;animation-delay:.6s;}
+@keyframes orbitFloat{0%,100%{transform:translateY(0px);}50%{transform:translateY(-14px);}}
+
+.scroll-cue{
+  position:absolute;bottom:2.4rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--gray-dim);font-size:.72rem;
+  letter-spacing:.2em;text-transform:uppercase;font-family:var(--font-mono);
+}
+.scroll-cue .line{width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:scrollcue 1.8s ease-in-out infinite;}
+@keyframes scrollcue{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* ==========================================================================
+   5. GLASS CARD BASE
+   ========================================================================== */
+.glass{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:var(--radius);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  position:relative;
+  transition:transform .45s var(--ease), border-color .45s var(--ease), box-shadow .45s var(--ease);
+}
+.glass::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(135deg, rgba(255,255,255,.18), transparent 40%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.6;
+}
+.glass:hover{transform:translateY(-6px);border-color:rgba(139,92,246,.35);box-shadow:0 24px 60px -24px rgba(59,130,246,.35);}
+
+/* ==========================================================================
+   6. ABOUT
+   ========================================================================== */
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:3.5rem;align-items:start;}
+.about-visual{position:relative;}
+.about-photo-frame{
+  aspect-ratio:4/5;border-radius:26px;position:relative;overflow:hidden;
+  background:linear-gradient(155deg, rgba(59,130,246,.18), rgba(139,92,246,.12));
+  border:1px solid var(--card-border);
+  display:flex;align-items:center;justify-content:center;
+}
+.about-photo-frame .initials{font-family:var(--font-head);font-size:6rem;font-weight:700;color:rgba(255,255,255,.14);}
+.about-photo-frame .ring{position:absolute;border:1px solid rgba(255,255,255,.08);border-radius:50%;}
+.about-photo-frame .ring.r1{width:70%;height:70%;animation:spin 30s linear infinite;}
+.about-photo-frame .ring.r2{width:90%;height:90%;border-style:dashed;animation:spin 46s linear infinite reverse;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.about-badge{
+  position:absolute;bottom:-1.2rem;right:-1rem;padding:1rem 1.3rem;border-radius:16px;
+  display:flex;align-items:center;gap:.8rem;
+}
+.about-badge i{font-size:1.4rem;color:var(--accent);}
+.about-badge strong{display:block;font-family:var(--font-head);font-size:1.1rem;}
+.about-badge span{font-size:.72rem;color:var(--gray);}
+
+.about-text p{color:var(--gray);line-height:1.85;font-size:1.02rem;margin-bottom:1.1rem;}
+.about-info{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;}
+.info-card{padding:1.2rem 1.3rem;}
+.info-card span.label{font-family:var(--font-mono);font-size:.68rem;color:var(--gray-dim);text-transform:uppercase;letter-spacing:.14em;}
+.info-card p.value{font-weight:600;margin-top:.35rem;font-size:.96rem;}
+
+/* ==========================================================================
+   7. SKILLS
+   ========================================================================== */
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem 2.4rem;}
+.skill-item{padding:1.3rem 1.5rem;}
+.skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem;}
+.skill-top .name{display:flex;align-items:center;gap:.7rem;font-weight:600;font-size:.95rem;}
+.skill-top .name i{color:var(--accent);font-size:1rem;}
+.skill-top .pct{font-family:var(--font-mono);color:var(--gray);font-size:.85rem;}
+.bar-track{height:7px;border-radius:10px;background:rgba(255,255,255,.07);overflow:hidden;}
+.bar-fill{height:100%;border-radius:10px;width:0%;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));position:relative;transition:width 1.4s var(--ease);}
+.bar-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);width:40%;animation:shine 2.4s linear infinite;}
+@keyframes shine{0%{transform:translateX(-100%);}100%{transform:translateX(350%);}}
+
+/* ==========================================================================
+   8. SERVICES
+   ========================================================================== */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;}
+.service-card{padding:2.1rem 1.9rem;overflow:hidden;}
+.service-icon{
+  width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg, rgba(59,130,246,.18), rgba(139,92,246,.14));
+  margin-bottom:1.5rem;font-size:1.4rem;color:var(--accent);
+  transition:transform .45s var(--ease);
+}
+.service-card:hover .service-icon{transform:rotate(-8deg) scale(1.08);}
+.service-card h3{font-family:var(--font-head);font-size:1.2rem;margin-bottom:.7rem;}
+.service-card p{color:var(--gray);font-size:.92rem;line-height:1.7;}
+.service-num{position:absolute;top:1.6rem;right:1.8rem;font-family:var(--font-mono);font-size:.75rem;color:var(--gray-dim);}
+
+/* ==========================================================================
+   9. PORTFOLIO
+   ========================================================================== */
+.filter-row{display:flex;gap:.7rem;margin-bottom:2.6rem;flex-wrap:wrap;}
+.filter-btn{
+  padding:.55rem 1.3rem;border-radius:100px;border:1px solid rgba(255,255,255,.13);
+  font-size:.82rem;font-weight:500;color:var(--gray);transition:all .35s var(--ease);
+}
+.filter-btn.active, .filter-btn:hover{background:linear-gradient(100deg,var(--primary),var(--secondary));color:#fff;border-color:transparent;}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;}
+.project-card{overflow:hidden;padding:0;}
+.project-media{
+  aspect-ratio:16/11;position:relative;overflow:hidden;
+  background:linear-gradient(150deg, rgba(59,130,246,.22), rgba(139,92,246,.16), rgba(6,182,212,.14));
+  display:flex;align-items:center;justify-content:center;
+}
+.project-media i{font-size:2.6rem;color:rgba(255,255,255,.28);transition:transform .6s var(--ease);}
+.project-card:hover .project-media i{transform:scale(1.15) rotate(6deg);}
+.project-media .mesh{position:absolute;inset:0;background-image:radial-gradient(circle at 30% 20%, rgba(255,255,255,.12), transparent 55%);}
+.project-overlay{
+  position:absolute;inset:0;background:rgba(9,9,11,.72);display:flex;align-items:center;justify-content:center;gap:.9rem;
+  opacity:0;transition:opacity .4s var(--ease);
+}
+.project-card:hover .project-overlay{opacity:1;}
+.icon-btn{
+  width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;transition:all .3s var(--ease);
+}
+.icon-btn:hover{background:var(--accent);transform:translateY(-4px);}
+.project-body{padding:1.5rem 1.6rem 1.7rem;}
+.project-body h3{font-family:var(--font-head);font-size:1.12rem;margin-bottom:.5rem;}
+.tech-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem;}
+.tech-tags span{font-family:var(--font-mono);font-size:.68rem;padding:.28rem .6rem;border-radius:6px;background:rgba(255,255,255,.06);color:var(--gray);}
+
+/* ==========================================================================
+   10. EXPERIENCE TIMELINE
+   ========================================================================== */
+.timeline{position:relative;max-width:760px;margin-inline:auto;}
+.timeline::before{
+  content:'';position:absolute;left:24px;top:0;bottom:0;width:1px;
+  background:linear-gradient(var(--primary),var(--secondary),var(--accent));
+}
+.tl-item{position:relative;padding-left:70px;margin-bottom:3rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{
+  position:absolute;left:12px;top:2px;width:26px;height:26px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 6px rgba(6,182,212,.08);
+}
+.tl-dot::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);}
+.tl-item .glass{padding:1.5rem 1.7rem;}
+.tl-item h3{font-family:var(--font-head);font-size:1.1rem;display:flex;align-items:center;gap:.7rem;}
+.tl-item .tag{font-family:var(--font-mono);font-size:.68rem;color:var(--accent);background:rgba(6,182,212,.1);padding:.2rem .6rem;border-radius:6px;}
+.tl-item p{color:var(--gray);margin-top:.6rem;font-size:.92rem;line-height:1.7;}
+
+/* ==========================================================================
+   11. ACHIEVEMENTS / COUNTERS
+   ========================================================================== */
+.achieve-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;
+  border-radius:28px;padding:3.2rem 2rem;
+  background:linear-gradient(120deg, rgba(59,130,246,.10), rgba(139,92,246,.08));
+  border:1px solid rgba(255,255,255,.08);
+}
+.achieve-item{text-align:center;}
+.achieve-item h3{
+  font-family:var(--font-head);font-size:clamp(2.2rem,4vw,3rem);font-weight:700;
+  background:linear-gradient(100deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.achieve-item span{color:var(--gray);font-size:.85rem;margin-top:.4rem;display:block;}
+
+/* ==========================================================================
+   12. WHY HIRE ME
+   ========================================================================== */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3rem;}
+.why-card{padding:1.7rem 1.5rem;text-align:left;}
+.why-card i{font-size:1.5rem;color:var(--secondary);margin-bottom:1rem;display:block;}
+.why-card h4{font-family:var(--font-head);font-size:1rem;margin-bottom:.4rem;}
+.why-card p{color:var(--gray);font-size:.84rem;line-height:1.6;}
+
+/* ==========================================================================
+   13. TESTIMONIALS
+   ========================================================================== */
+.testi-wrap{position:relative;max-width:760px;margin-inline:auto;min-height:260px;}
+.testi-card{
+  padding:2.6rem 2.6rem;position:absolute;inset:0;opacity:0;transform:translateX(30px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease);pointer-events:none;
+}
+.testi-card.active{opacity:1;transform:translateX(0);pointer-events:auto;position:relative;}
+.testi-card i.quote{color:var(--accent);font-size:1.6rem;opacity:.5;margin-bottom:1rem;}
+.testi-card p{font-size:1.05rem;line-height:1.85;color:#e6e6ea;font-style:italic;}
+.testi-person{display:flex;align-items:center;gap:.9rem;margin-top:1.6rem;}
+.testi-avatar{
+  width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));font-family:var(--font-head);font-weight:700;
+}
+.testi-person strong{display:block;font-size:.92rem;}
+.testi-person span{font-size:.76rem;color:var(--gray);}
+.testi-dots{display:flex;gap:.55rem;justify-content:center;margin-top:2rem;}
+.testi-dots button{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);transition:all .35s var(--ease);}
+.testi-dots button.active{background:var(--accent);width:24px;border-radius:6px;}
+
+/* ==========================================================================
+   14. CONTACT
+   ========================================================================== */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;}
+.contact-info-card{padding:2.2rem;margin-bottom:1.2rem;display:flex;gap:1.1rem;align-items:flex-start;}
+.contact-info-card i{font-size:1.3rem;color:var(--accent);margin-top:.2rem;}
+.contact-info-card strong{display:block;font-family:var(--font-head);font-size:1rem;margin-bottom:.3rem;}
+.contact-info-card span{color:var(--gray);font-size:.9rem;}
+.social-row{display:flex;gap:.8rem;margin-top:1.6rem;}
+.social-row a{
+  width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.14);color:var(--gray);transition:all .35s var(--ease);
+}
+.social-row a:hover{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-color:transparent;transform:translateY(-4px);}
+
+.contact-form{padding:2.4rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;}
+.field{margin-bottom:1.1rem;position:relative;}
+.field label{font-size:.78rem;color:var(--gray);display:block;margin-bottom:.5rem;font-family:var(--font-mono);letter-spacing:.04em;}
+.field input, .field textarea{
+  width:100%;padding:.85rem 1rem;border-radius:12px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);color:#fff;font-family:var(--font-body);font-size:.92rem;
+  transition:border-color .3s, background .3s;
+}
+.field textarea{resize:vertical;min-height:120px;}
+.field input:focus, .field textarea:focus{border-color:var(--accent);background:rgba(255,255,255,.06);outline:none;}
+.form-msg{margin-top:1rem;font-size:.85rem;color:var(--accent);min-height:1.2em;}
+
+/* ==========================================================================
+   15. FOOTER
+   ========================================================================== */
+footer{padding:4.5rem 0 2rem;border-top:1px solid rgba(255,255,255,.07);position:relative;z-index:1;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;margin-bottom:3rem;}
+.footer-about p{color:var(--gray);font-size:.88rem;line-height:1.75;margin-top:1rem;max-width:280px;}
+.footer-col h4{font-family:var(--font-head);font-size:.95rem;margin-bottom:1.2rem;}
+.footer-col ul li{margin-bottom:.7rem;}
+.footer-col ul li a{color:var(--gray);font-size:.87rem;transition:color .3s;}
+.footer-col ul li a:hover{color:var(--accent);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.06);color:var(--gray-dim);font-size:.82rem;
+}
+.footer-bottom span.heart{color:#ef4444;}
+
+/* ==========================================================================
+   16. BACK TO TOP
+   ========================================================================== */
+#back-top{
+  position:fixed;bottom:2rem;right:2rem;width:48px;height:48px;border-radius:50%;
+  background:var(--card);border:1px solid var(--card-border);backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;z-index:900;
+  opacity:0;visibility:hidden;transform:translateY(20px);transition:all .4s var(--ease);
+}
+#back-top.show{opacity:1;visibility:visible;transform:translateY(0);}
+#back-top:hover{background:linear-gradient(135deg,var(--primary),var(--secondary));transform:translateY(-5px);}
+
+/* ==========================================================================
+   17. RESPONSIVE
+   ========================================================================== */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-visual{height:340px;order:-1;}
+  .about-grid{grid-template-columns:1fr;}
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .portfolio-grid{grid-template-columns:repeat(2,1fr);}
+  .why-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .achieve-strip{grid-template-columns:repeat(2,1fr);row-gap:2rem;}
+}
+@media(max-width:768px){
+  .nav-links, .hide-mobile{display:none;}
+  .burger{display:flex;}
+  .skills-wrap{grid-template-columns:1fr;}
+  .services-grid, .portfolio-grid, .why-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;gap:2rem;}
+  .about-info{grid-template-columns:1fr;}
+  .hero-stats{gap:1.4rem;flex-wrap:wrap;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-mark">Konain<span style="color:var(--primary)">.</span></div>
+  <div class="loader-bar"><span></span></div>
+  <div class="loader-pct">Compiling experience…</div>
+</div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div id="cursor-glow"></div>
+<canvas id="particle-canvas"></canvas>
+<div class="bg-grid"></div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- ============================= NAVBAR ============================= -->
+<header id="siteHeader">
+  <div class="container">
+    <nav>
+      <a href="#home" class="logo">Konain<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-outline hide-mobile" id="downloadCv"><i class="fa-solid fa-download"></i> Download CV</a>
+        <a href="#contact" class="btn btn-primary">Hire Me</a>
+        <div class="burger" id="burger"><span></span><span></span><span></span></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" class="mnav">Home</a>
+  <a href="#about" class="mnav">About</a>
+  <a href="#skills" class="mnav">Skills</a>
+  <a href="#services" class="mnav">Services</a>
+  <a href="#portfolio" class="mnav">Portfolio</a>
+  <a href="#experience" class="mnav">Experience</a>
+  <a href="#contact" class="mnav">Contact</a>
+  <div class="nav-cta">
+    <a href="#contact" class="btn btn-outline">Download CV</a>
+    <a href="#contact" class="btn btn-primary">Hire Me</a>
+  </div>
+</div>
+
+<!-- ============================= HERO ============================= -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <div class="eyebrow" data-aos="fade-up">Available for freelance &amp; junior roles</div>
+      <h1 data-aos="fade-up" data-aos-delay="80">Hi, I'm <span class="grad-text">Muhammad Konain Ali</span></h1>
+      <div class="hero-role" data-aos="fade-up" data-aos-delay="140">
+        <span id="typedRole"></span><span class="cursor-bar"></span>
+      </div>
+      <p class="intro" data-aos="fade-up" data-aos-delay="200">
+        I design and build software that thinks — from Python backends and clean web interfaces
+        to automated AI workflows powered by n8n. I care about readable code, thoughtful design,
+        and systems that quietly do their job well.
+      </p>
+      <div class="hero-btns" data-aos="fade-up" data-aos-delay="260">
+        <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Hire Me</a>
+        <a href="#" class="btn btn-outline" id="downloadCv2"><i class="fa-solid fa-download"></i> Download CV</a>
+      </div>
+      <div class="hero-stats" data-aos="fade-up" data-aos-delay="320">
+        <div><h3 class="counter" data-target="10">0</h3><span>Completed Projects</span></div>
+        <div><h3 class="counter" data-target="2">0</h3><span>Years Learning</span></div>
+        <div><h3 class="counter" data-target="8">0</h3><span>Core Skills</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" data-aos="fade-left" data-aos-delay="200">
+      <div id="hero-3d"></div>
+      <div class="hero-orbit-card oc1"><i class="fa-brands fa-python"></i> Python Engine Online</div>
+      <div class="hero-orbit-card oc2"><i class="fa-solid fa-diagram-project"></i> n8n Workflow Running</div>
+      <div class="hero-orbit-card oc3"><i class="fa-solid fa-database"></i> MySQL Connected</div>
+      <div class="hero-orbit-card oc4"><i class="fa-solid fa-wand-magic-sparkles"></i> Prompt Optimized</div>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ============================= ABOUT ============================= -->
+<section id="about">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up">
+      <div class="eyebrow">About Me</div>
+      <h2>Turning logic into <span class="grad-text">working software.</span></h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-visual" data-aos="fade-right">
+        <div class="about-photo-frame">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <span class="initials">MK</span>
+        </div>
+        <div class="about-badge glass">
+          <i class="fa-solid fa-circle-check"></i>
+          <div><strong>Open to Work</strong><span>Remote &amp; on-site</span></div>
+        </div>
+      </div>
+
+      <div class="about-text" data-aos="fade-left">
+        <p>
+          I'm a junior Python developer with a genuine curiosity for how software, data, and
+          intelligence come together. My work spans backend logic, web interfaces, database design,
+          and increasingly, AI-driven automation — building systems where n8n and thoughtfully
+          engineered prompts do the repetitive thinking so people don't have to.
+        </p>
+        <p>
+          Alongside development, I design — clean visual identities, UI mockups, and content that
+          communicates clearly. I like projects that sit at the intersection of logic and design,
+          where a well-structured database matters as much as a well-placed pixel.
+        </p>
+
+        <div class="about-info">
+          <div class="glass info-card"><span class="label">Name</span><p class="value">Muhammad Konain Ali</p></div>
+          <div class="glass info-card"><span class="label">Profession</span><p class="value">Python &amp; AI Automation Dev</p></div>
+          <div class="glass info-card"><span class="label">Email</span><p class="value">akonain90@gmail.com</p></div>
+          <div class="glass info-card"><span class="label">Phone</span><p class="value">+92 315 1018302</p></div>
+          <div class="glass info-card"><span class="label">Experience</span><p class="value">2+ Years Learning</p></div>
+          <div class="glass info-card"><span class="label">Languages</span><p class="value">English, Urdu</p></div>
+          <div class="glass info-card"><span class="label">Availability</span><p class="value">Freelance / Junior Role</p></div>
+          <div class="glass info-card"><span class="label">Location</span><p class="value">Pakistan</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= SKILLS ============================= -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up">
+      <div class="eyebrow">Skills</div>
+      <h2>Tools I use to <span class="grad-text">build &amp; automate.</span></h2>
+      <p>A blend of programming, design, and AI-native tooling — each sharpened through hands-on projects.</p>
+    </div>
+
+    <div class="skills-wrap">
+      <div class="skill-item glass" data-aos="fade-up">
+        <div class="skill-top"><span class="name"><i class="fa-brands fa-python"></i> Python</span><span class="pct">90%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-item glass" data-aos="fade-up" data-aos-delay="50">
+        <div class="skill-top"><span class="name"><i class="fa-brands fa-html5"></i> HTML5 / CSS3</span><span class="pct">95%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
+      </div>
+      <div class="skill-item glass" data-aos="fade-up" data-aos-delay="100">
+        <div class="skill-top"><span class="name"><i class="fa-brands fa-js"></i> JavaScript</span><span class="pct">85%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-item glass" data-aos="fade-up" data-aos-delay="150">
+        <div class="skill-top"><span class="name"><i class="fa-solid fa-database"></i> MySQL</span><span class="pct">90%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-item glass" data-aos="fade-up" data-aos-delay="200">
+        <div class="skill-top"><span class="name"><i class="fa-solid fa-server"></i> SQL Server</span><span class="pct">85%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-item glass" data-aos="fade-up" data-aos-delay="250">
+        <div class="skill-top"><span class="name"><i class="fa-solid fa-palette"></i> Graphic Design</span><span class="pct">90%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-item glass" data-aos="fade-up" data-aos-delay="300">
+        <div class="skill-top"><span class="name"><i class="fa-solid fa-wand-magic-sparkles"></i> Prompt Engineering</span><span class="pct">95%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
+      </div>
+      <div class="skill-item glass" data-aos="fade-up" data-aos-delay="350">
+        <div class="skill-top"><span class="name"><i class="fa-solid fa-robot"></i> AI Content Creation</span><span class="pct">95%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
+      </div>
+      <div class="skill-item glass" data-aos="fade-up" data-aos-delay="400" style="grid-column:1/-1;">
+        <div class="skill-top"><span class="name"><i class="fa-solid fa-diagram-project"></i> n8n Automation</span><span class="pct">88%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="88"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= SERVICES ============================= -->
+<section id="services">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up">
+      <div class="eyebrow">Services</div>
+      <h2>What I can <span class="grad-text">build for you.</span></h2>
+      <p>From a single script to a full automated pipeline — here's where I add the most value.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card glass" data-aos="fade-up">
+        <span class="service-num">01</span>
+        <div class="service-icon"><i class="fa-brands fa-python"></i></div>
+        <h3>Python Development</h3>
+        <p>Scripts, automation tools, and backend logic written to be readable, tested, and easy to extend.</p>
+      </div>
+      <div class="service-card glass" data-aos="fade-up" data-aos-delay="80">
+        <span class="service-num">02</span>
+        <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+        <h3>Web Development</h3>
+        <p>Responsive, fast-loading websites and landing pages built with clean semantic code.</p>
+      </div>
+      <div class="service-card glass" data-aos="fade-up" data-aos-delay="160">
+        <span class="service-num">03</span>
+        <div class="service-icon"><i class="fa-solid fa-pen-nib"></i></div>
+        <h3>Graphic Designing</h3>
+        <p>Visual identities, social creatives, and UI mockups that communicate before they decorate.</p>
+      </div>
+      <div class="service-card glass" data-aos="fade-up" data-aos-delay="240">
+        <span class="service-num">04</span>
+        <div class="service-icon"><i class="fa-solid fa-database"></i></div>
+        <h3>Database Management</h3>
+        <p>Schema design, query optimization, and reliable data structures in MySQL and SQL Server.</p>
+      </div>
+      <div class="service-card glass" data-aos="fade-up" data-aos-delay="320">
+        <span class="service-num">05</span>
+        <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <h3>Prompt Engineering</h3>
+        <p>Structured prompts and evaluation loops that make AI output consistent and production-ready.</p>
+      </div>
+      <div class="service-card glass" data-aos="fade-up" data-aos-delay="400">
+        <span class="service-num">06</span>
+        <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <h3>AI Automation with n8n</h3>
+        <p>Connected workflows that move data between tools automatically, so nothing needs a human click.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PORTFOLIO ============================= -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up">
+      <div class="eyebrow">Portfolio</div>
+      <h2>Recent <span class="grad-text">project work.</span></h2>
+      <p>A mix of applications, interfaces and systems built while learning and freelancing.</p>
+    </div>
+
+    <div class="filter-row" data-aos="fade-up">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="ai">AI &amp; Automation</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="data">Database</button>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="project-card glass" data-cat="ai" data-aos="fade-up">
+        <div class="project-media"><div class="mesh"></div><i class="fa-solid fa-comments"></i>
+          <div class="project-overlay"><a href="#" class="icon-btn" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a href="#" class="icon-btn" aria-label="GitHub repository"><i class="fa-brands fa-github"></i></a></div>
+        </div>
+        <div class="project-body">
+          <h3>AI Chatbot</h3>
+          <p style="color:var(--gray);font-size:.88rem;">Conversational assistant with prompt-tuned response logic.</p>
+          <div class="tech-tags"><span>Python</span><span>OpenAI API</span><span>Flask</span></div>
+        </div>
+      </div>
+
+      <div class="project-card glass" data-cat="web" data-aos="fade-up" data-aos-delay="80">
+        <div class="project-media"><div class="mesh"></div><i class="fa-solid fa-globe"></i>
+          <div class="project-overlay"><a href="#" class="icon-btn" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a href="#" class="icon-btn" aria-label="GitHub repository"><i class="fa-brands fa-github"></i></a></div>
+        </div>
+        <div class="project-body">
+          <h3>Portfolio Website</h3>
+          <p style="color:var(--gray);font-size:.88rem;">Personal portfolio with animated sections and dark UI.</p>
+          <div class="tech-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+        </div>
+      </div>
+
+      <div class="project-card glass" data-cat="data" data-aos="fade-up" data-aos-delay="160">
+        <div class="project-media"><div class="mesh"></div><i class="fa-solid fa-graduation-cap"></i>
+          <div class="project-overlay"><a href="#" class="icon-btn" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a href="#" class="icon-btn" aria-label="GitHub repository"><i class="fa-brands fa-github"></i></a></div>
+        </div>
+        <div class="project-body">
+          <h3>Student Management System</h3>
+          <p style="color:var(--gray);font-size:.88rem;">Records, grading and attendance backed by a relational database.</p>
+          <div class="tech-tags"><span>Python</span><span>MySQL</span><span>Tkinter</span></div>
+        </div>
+      </div>
+
+      <div class="project-card glass" data-cat="web" data-aos="fade-up">
+        <div class="project-media"><div class="mesh"></div><i class="fa-solid fa-layer-group"></i>
+          <div class="project-overlay"><a href="#" class="icon-btn" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a href="#" class="icon-btn" aria-label="GitHub repository"><i class="fa-brands fa-github"></i></a></div>
+        </div>
+        <div class="project-body">
+          <h3>Modern Landing Page</h3>
+          <p style="color:var(--gray);font-size:.88rem;">Conversion-focused landing page with scroll-triggered motion.</p>
+          <div class="tech-tags"><span>HTML</span><span>CSS</span><span>GSAP</span></div>
+        </div>
+      </div>
+
+      <div class="project-card glass" data-cat="ai" data-aos="fade-up" data-aos-delay="80">
+        <div class="project-media"><div class="mesh"></div><i class="fa-solid fa-pen-fancy"></i>
+          <div class="project-overlay"><a href="#" class="icon-btn" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a href="#" class="icon-btn" aria-label="GitHub repository"><i class="fa-brands fa-github"></i></a></div>
+        </div>
+        <div class="project-body">
+          <h3>AI Content Generator</h3>
+          <p style="color:var(--gray);font-size:.88rem;">Prompt-driven tool for generating structured marketing copy.</p>
+          <div class="tech-tags"><span>Python</span><span>Prompt Engineering</span></div>
+        </div>
+      </div>
+
+      <div class="project-card glass" data-cat="data" data-aos="fade-up" data-aos-delay="160">
+        <div class="project-media"><div class="mesh"></div><i class="fa-solid fa-chart-line"></i>
+          <div class="project-overlay"><a href="#" class="icon-btn" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a href="#" class="icon-btn" aria-label="GitHub repository"><i class="fa-brands fa-github"></i></a></div>
+        </div>
+        <div class="project-body">
+          <h3>Database Dashboard</h3>
+          <p style="color:var(--gray);font-size:.88rem;">Live reporting dashboard querying live SQL Server data.</p>
+          <div class="tech-tags"><span>SQL Server</span><span>Python</span><span>Charts</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= EXPERIENCE ============================= -->
+<section id="experience">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up">
+      <div class="eyebrow">Experience</div>
+      <h2>The path so <span class="grad-text">far.</span></h2>
+      <p>A self-driven learning journey — one skill built on top of the last.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item" data-aos="fade-up">
+        <div class="tl-dot"></div>
+        <div class="glass"><h3>Learning Programming <span class="tag">Foundation</span></h3><p>Started with core programming logic, control flow and problem solving.</p></div>
+      </div>
+      <div class="tl-item" data-aos="fade-up" data-aos-delay="60">
+        <div class="tl-dot"></div>
+        <div class="glass"><h3>Web Development <span class="tag">HTML / CSS / JS</span></h3><p>Built responsive interfaces and learned how the browser actually works.</p></div>
+      </div>
+      <div class="tl-item" data-aos="fade-up" data-aos-delay="120">
+        <div class="tl-dot"></div>
+        <div class="glass"><h3>Python Development <span class="tag">Backend</span></h3><p>Moved into scripting, automation and application logic with Python.</p></div>
+      </div>
+      <div class="tl-item" data-aos="fade-up" data-aos-delay="180">
+        <div class="tl-dot"></div>
+        <div class="glass"><h3>Database Management <span class="tag">MySQL / SQL Server</span></h3><p>Designed schemas and wrote queries to make data reliable and fast.</p></div>
+      </div>
+      <div class="tl-item" data-aos="fade-up" data-aos-delay="240">
+        <div class="tl-dot"></div>
+        <div class="glass"><h3>AI Prompt Engineering <span class="tag">LLMs</span></h3><p>Learned to structure prompts that produce consistent, usable output.</p></div>
+      </div>
+      <div class="tl-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="tl-dot"></div>
+        <div class="glass"><h3>AI Content Creation <span class="tag">Applied AI</span></h3><p>Used AI tools to produce and refine content at production quality.</p></div>
+      </div>
+      <div class="tl-item" data-aos="fade-up" data-aos-delay="360">
+        <div class="tl-dot"></div>
+        <div class="glass"><h3>n8n Automation <span class="tag">Current Focus</span></h3><p>Now building connected, automated workflows across tools and APIs.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= ACHIEVEMENTS ============================= -->
+<section id="achievements">
+  <div class="container">
+    <div class="achieve-strip" data-aos="zoom-in">
+      <div class="achieve-item"><h3 class="counter" data-target="10">0</h3><span>Completed Projects</span></div>
+      <div class="achieve-item"><h3 class="counter" data-target="100">0</h3><span>AI Prompts Created</span></div>
+      <div class="achieve-item"><h3 class="counter" data-target="20">0</h3><span>Happy Clients</span></div>
+      <div class="achieve-item"><h3 class="counter" data-target="2">0</h3><span>Years Learning Experience</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= WHY HIRE ME ============================= -->
+<section id="why">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up">
+      <div class="eyebrow">Why Hire Me</div>
+      <h2>What I bring to <span class="grad-text">every project.</span></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card glass" data-aos="fade-up"><i class="fa-solid fa-puzzle-piece"></i><h4>Problem Solving</h4><p>Breaking complex requirements into clear, manageable pieces.</p></div>
+      <div class="why-card glass" data-aos="fade-up" data-aos-delay="60"><i class="fa-solid fa-lightbulb"></i><h4>Creative Thinking</h4><p>Finding design and technical solutions others might miss.</p></div>
+      <div class="why-card glass" data-aos="fade-up" data-aos-delay="120"><i class="fa-solid fa-gauge-high"></i><h4>Fast Learning</h4><p>Picking up new tools and frameworks quickly, on the job.</p></div>
+      <div class="why-card glass" data-aos="fade-up" data-aos-delay="180"><i class="fa-solid fa-mobile-screen"></i><h4>Responsive Design</h4><p>Interfaces that work cleanly on every screen size.</p></div>
+      <div class="why-card glass" data-aos="fade-up" data-aos-delay="240"><i class="fa-solid fa-object-group"></i><h4>Modern UI/UX</h4><p>Designing with hierarchy, spacing and intent — not defaults.</p></div>
+      <div class="why-card glass" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-brain"></i><h4>AI Solutions</h4><p>Applying prompt engineering and automation where it adds real value.</p></div>
+      <div class="why-card glass" data-aos="fade-up" data-aos-delay="360"><i class="fa-solid fa-code-branch"></i><h4>Clean Code</h4><p>Readable, maintainable code that's easy to hand off or extend.</p></div>
+      <div class="why-card glass" data-aos="fade-up" data-aos-delay="420"><i class="fa-solid fa-comments"></i><h4>Professional Communication</h4><p>Clear updates and honest timelines from kickoff to delivery.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TESTIMONIALS ============================= -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up" style="margin-inline:auto;text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Testimonials</div>
+      <h2>What people <span class="grad-text">say.</span></h2>
+    </div>
+
+    <div class="testi-wrap" data-aos="fade-up">
+      <div class="testi-card glass active">
+        <i class="fa-solid fa-quote-left quote"></i>
+        <p>Konain picked up our requirements fast and delivered a clean, working database system ahead of schedule. Communication was smooth the entire time.</p>
+        <div class="testi-person"><div class="testi-avatar">A</div><div><strong>Ayesha R.</strong><span>Small Business Owner</span></div></div>
+      </div>
+      <div class="testi-card glass">
+        <i class="fa-solid fa-quote-left quote"></i>
+        <p>The automation workflow he built in n8n saved our team hours every week. He explained everything in plain language, no jargon.</p>
+        <div class="testi-person"><div class="testi-avatar">H</div><div><strong>Hamza T.</strong><span>Startup Founder</span></div></div>
+      </div>
+      <div class="testi-card glass">
+        <i class="fa-solid fa-quote-left quote"></i>
+        <p>Great eye for design and solid Python skills. Our landing page looks premium now, and it loads fast on mobile too.</p>
+        <div class="testi-person"><div class="testi-avatar">S</div><div><strong>Sara M.</strong><span>Marketing Lead</span></div></div>
+      </div>
+      <div class="testi-dots" id="testiDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CONTACT ============================= -->
+<section id="contact">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up">
+      <div class="eyebrow">Contact</div>
+      <h2>Let's build something <span class="grad-text">worth shipping.</span></h2>
+      <p>Have a project in mind? Send a few details and I'll reply within a day.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div data-aos="fade-right">
+        <div class="contact-info-card glass">
+          <i class="fa-solid fa-phone"></i>
+          <div><strong>Phone</strong><span>+92 315 1018302</span></div>
+        </div>
+        <div class="contact-info-card glass">
+          <i class="fa-solid fa-envelope"></i>
+          <div><strong>Email</strong><span>akonain90@gmail.com</span></div>
+        </div>
+        <div class="contact-info-card glass">
+          <i class="fa-solid fa-location-dot"></i>
+          <div><strong>Location</strong><span>Pakistan</span></div>
+        </div>
+        <div class="social-row">
+          <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <form class="contact-form glass" id="contactForm" data-aos="fade-left">
+        <div class="form-row">
+          <div class="field"><label for="cname">Name</label><input id="cname" type="text" required placeholder="Your name"></div>
+          <div class="field"><label for="cemail">Email</label><input id="cemail" type="email" required placeholder="you@email.com"></div>
+        </div>
+        <div class="field"><label for="csubject">Subject</label><input id="csubject" type="text" required placeholder="What's this about?"></div>
+        <div class="field"><label for="cmessage">Message</label><textarea id="cmessage" required placeholder="Tell me about your project..."></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= FOOTER ============================= -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#home" class="logo">Konain<span>.</span></a>
+        <p>Junior Python Developer &amp; AI Automation Engineer building clean, intelligent software from Pakistan.</p>
+        <div class="social-row">
+          <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#experience">Experience</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Python Development</a></li>
+          <li><a href="#services">Web Development</a></li>
+          <li><a href="#services">Graphic Designing</a></li>
+          <li><a href="#services">AI Automation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:akonain90@gmail.com">akonain90@gmail.com</a></li>
+          <li><a href="tel:+923151018302">+92 315 1018302</a></li>
+          <li><a href="#contact">Pakistan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Muhammad Konain Ali. All rights reserved.</span>
+      <span>Made with <span class="heart">❤</span> by Muhammad Konain Ali</span>
+    </div>
+  </div>
+</footer>
+
+<button id="back-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<!-- ============================= SCRIPTS ============================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------- 1. LOADER ---------- */
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('hide'), 900);
+  });
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- 2. AOS + GSAP ScrollTrigger ---------- */
+  AOS.init({ duration: 800, once: true, offset: 60, easing: 'ease-out-cubic' });
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- 3. NAVBAR SCROLL STATE + ACTIVE LINK ---------- */
+  const header = document.getElementById('siteHeader');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  function onScroll(){
+    header.classList.toggle('scrolled', window.scrollY > 40);
+
+    // scroll progress
+    const h = document.documentElement;
+    const progress = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('scrollProgress').style.width = progress + '%';
+
+    // back to top
+    document.getElementById('back-top').classList.toggle('show', window.scrollY > 500);
+
+    // active nav link
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 140;
+      if (window.scrollY >= top) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+  }
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  document.getElementById('back-top').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  /* ---------- 4. MOBILE MENU ---------- */
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mnav').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); mobileMenu.classList.remove('open');
+  }));
+
+  /* ---------- 5. TYPING ANIMATION ---------- */
+  const roles = ['Junior Python Developer','Web Developer','Prompt Engineer','AI Content Creator','Graphic Designer','AI Automation Expert'];
+  const typedEl = document.getElementById('typedRole');
+  let rIndex = 0, cIndex = 0, deleting = false;
+  function typeLoop(){
+    const word = roles[rIndex];
+    if(!deleting){
+      cIndex++;
+      typedEl.textContent = word.slice(0, cIndex);
+      if(cIndex === word.length){ deleting = true; setTimeout(typeLoop, 1500); return; }
+    } else {
+      cIndex--;
+      typedEl.textContent = word.slice(0, cIndex);
+      if(cIndex === 0){ deleting = false; rIndex = (rIndex+1) % roles.length; }
+    }
+    setTimeout(typeLoop, deleting ? 40 : 80);
+  }
+  typeLoop();
+
+  /* ---------- 6. RIPPLE EFFECT ON BUTTONS ---------- */
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('click', function(e){
+      const rect = this.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = (e.clientX - rect.left) + 'px';
+      ripple.style.top = (e.clientY - rect.top) + 'px';
+      ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 650);
+    });
+  });
+
+  /* ---------- 7. CURSOR GLOW + PARALLAX ---------- */
+  const glow = document.getElementById('cursor-glow');
+  const heroVisual = document.querySelector('.hero-visual');
+  window.addEventListener('mousemove', (e) => {
+    glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+    if(heroVisual){
+      const rect = heroVisual.getBoundingClientRect();
+      const relX = (e.clientX - rect.left - rect.width/2) / rect.width;
+      const relY = (e.clientY - rect.top - rect.height/2) / rect.height;
+      document.querySelectorAll('.hero-orbit-card').forEach((card, i) => {
+        const depth = (i+1) * 6;
+        card.style.transform = `translate(${relX*depth}px, ${relY*depth}px)`;
+      });
+    }
+  });
+
+  /* ---------- 8. ANIMATED COUNTERS ---------- */
+  const counters = document.querySelectorAll('.counter');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && !entry.target.dataset.done){
+        entry.target.dataset.done = 'true';
+        const target = parseInt(entry.target.dataset.target, 10);
+        let current = 0;
+        const step = Math.max(target / 60, 1);
+        const tick = () => {
+          current += step;
+          if(current >= target){ entry.target.textContent = target + '+'; return; }
+          entry.target.textContent = Math.floor(current);
+          requestAnimationFrame(tick);
+        };
+        tick();
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  /* ---------- 9. SKILL BARS ---------- */
+  const bars = document.querySelectorAll('.bar-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.style.width = entry.target.dataset.width + '%';
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  bars.forEach(b => barObserver.observe(b));
+
+  /* ---------- 10. PORTFOLIO FILTER ---------- */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      projectCards.forEach(card => {
+        const show = filter === 'all' || card.dataset.cat === filter;
+        gsap.to(card, { opacity: show ? 1 : 0, scale: show ? 1 : 0.92, duration: 0.35, onStart(){ if(show) card.style.display='block'; }, onComplete(){ if(!show) card.style.display='none'; } });
+      });
+    });
+  });
+
+  /* ---------- 11. TESTIMONIALS SLIDER ---------- */
+  const testiCards = document.querySelectorAll('.testi-card');
+  const dotsWrap = document.getElementById('testiDots');
+  testiCards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    if(i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => showTesti(i));
+    dotsWrap.appendChild(dot);
+  });
+  let testiIndex = 0;
+  function showTesti(i){
+    testiCards.forEach(c => c.classList.remove('active'));
+    dotsWrap.querySelectorAll('button').forEach(d => d.classList.remove('active'));
+    testiCards[i].classList.add('active');
+    dotsWrap.children[i].classList.add('active');
+    testiIndex = i;
+  }
+  setInterval(() => showTesti((testiIndex + 1) % testiCards.length), 5000);
+
+  /* ---------- 12. CONTACT FORM ---------- */
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const msg = document.getElementById('formMsg');
+    msg.textContent = 'Sending…';
+    setTimeout(() => {
+      msg.textContent = "Thanks — your message has been noted. I'll reply to your email shortly.";
+      this.reset();
+    }, 900);
+  });
+
+  /* ---------- 13. DOWNLOAD CV (placeholder) ---------- */
+  ['downloadCv','downloadCv2'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Add your CV file link here to enable downloads.');
+    });
+  });
+
+  /* ---------- 14. GSAP SCROLL REVEALS FOR SECTION HEADS ---------- */
+  gsap.utils.toArray('.section-head').forEach(head => {
+    gsap.from(head, {
+      opacity: 0, y: 40, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: head, start: 'top 85%' }
+    });
+  });
+
+  /* ---------- 15. PARTICLE CANVAS ---------- */
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  function initParticles(){
+    const count = window.innerWidth < 768 ? 35 : 70;
+    particles = Array.from({length: count}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.6 + 0.4,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      hue: Math.random() > 0.5 ? '59,130,246' : (Math.random() > 0.5 ? '139,92,246' : '6,182,212')
+    }));
+  }
+  function animateParticles(){
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+      if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${p.hue},0.5)`;
+      ctx.fill();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+  resizeCanvas(); initParticles(); animateParticles();
+  window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+
+  /* ---------- 16. THREE.JS HERO 3D OBJECT ---------- */
+  (function initHero3D(){
+    const mount = document.getElementById('hero-3d');
+    if(!mount || typeof THREE === 'undefined') return;
+    const width = mount.clientWidth || 500, height = mount.clientHeight || 500;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, width/height, 0.1, 100);
+    camera.position.z = 6;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    mount.appendChild(renderer.domElement);
+
+    const group = new THREE.Group();
+
+    const icoGeo = new THREE.IcosahedronGeometry(1.6, 0);
+    const icoMat = new THREE.MeshBasicMaterial({ color: 0x3B82F6, wireframe: true, transparent: true, opacity: 0.85 });
+    const ico = new THREE.Mesh(icoGeo, icoMat);
+    group.add(ico);
+
+    const icoGeo2 = new THREE.IcosahedronGeometry(1.15, 1);
+    const icoMat2 = new THREE.MeshBasicMaterial({ color: 0x8B5CF6, wireframe: true, transparent: true, opacity: 0.55 });
+    const ico2 = new THREE.Mesh(icoGeo2, icoMat2);
+    group.add(ico2);
+
+    const ringGeo = new THREE.TorusGeometry(2.3, 0.01, 8, 100);
+    const ringMat = new THREE.MeshBasicMaterial({ color: 0x06B6D4, transparent: true, opacity: 0.5 });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI/2.4;
+    group.add(ring);
+
+    // scatter points
+    const pointsGeo = new THREE.BufferGeometry();
+    const pCount = 120;
+    const posArr = new Float32Array(pCount*3);
+    for(let i=0;i<pCount;i++){
+      const r = 2.6 + Math.random()*0.6;
+      const theta = Math.random()*Math.PI*2;
+      const phi = Math.acos((Math.random()*2)-1);
+      posArr[i*3] = r*Math.sin(phi)*Math.cos(theta);
+      posArr[i*3+1] = r*Math.sin(phi)*Math.sin(theta);
+      posArr[i*3+2] = r*Math.cos(phi);
+    }
+    pointsGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+    const pointsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.025, transparent:true, opacity:0.6 });
+    const points = new THREE.Points(pointsGeo, pointsMat);
+    group.add(points);
+
+    scene.add(group);
+
+    let mouseX = 0, mouseY = 0;
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5);
+      mouseY = (e.clientY / window.innerHeight - 0.5);
+    });
+
+    function animate(){
+      requestAnimationFrame(animate);
+      group.rotation.y += 0.0032;
+      group.rotation.x += 0.0011;
+      group.rotation.y += mouseX * 0.0012;
+      group.rotation.x += mouseY * 0.0012;
+      points.rotation.y -= 0.0012;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      const w = mount.clientWidth || 500, h = mount.clientHeight || 500;
+      camera.aspect = w/h; camera.updateProjectionMatrix();
+      renderer.setSize(w,h);
+    });
+  })();
+
+});
+</script>
+</body>
+</html>
